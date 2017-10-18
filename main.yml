@@ -1,0 +1,7 @@
+---
+
+- hosts:
+    - lab
+  roles:
+    - gocd_agent_install
+#    - gocd_server_install

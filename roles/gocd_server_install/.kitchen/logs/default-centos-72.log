@@ -1,0 +1,37 @@
+I, [2017-10-16T06:29:35.110708 #28577]  INFO -- default-centos-72: -----> Verifying <default-centos-72>...
+I, [2017-10-16T06:29:35.112193 #28577]  INFO -- default-centos-72: Preparing files for transfer
+I, [2017-10-16T06:29:38.026605 #28577]  INFO -- default-centos-72: -----> Busser installation detected (busser)
+I, [2017-10-16T06:29:38.026706 #28577]  INFO -- default-centos-72: Installing Busser plugins: busser-serverspec
+I, [2017-10-16T06:29:43.529060 #28577]  INFO -- default-centos-72: Plugin serverspec already installed
+I, [2017-10-16T06:29:44.570982 #28577]  INFO -- default-centos-72: Removing /tmp/verifier/suites/serverspec
+I, [2017-10-16T06:29:44.572766 #28577]  INFO -- default-centos-72: Transferring files to <default-centos-72>
+I, [2017-10-16T06:29:47.103556 #28577]  INFO -- default-centos-72: -----> Running serverspec test suite
+I, [2017-10-16T06:29:47.203463 #28577]  INFO -- default-centos-72: /opt/chef/embedded/bin/ruby -I/tmp/verifier/suites/serverspec -I/tmp/verifier/gems/gems/rspec-support-3.7.0/lib:/tmp/verifier/gems/gems/rspec-core-3.7.0/lib /opt/chef/embedded/bin/rspec --pattern /tmp/verifier/suites/serverspec/\*\*/\*_spec.rb --color --format documentation --default-path /tmp/verifier/suites/serverspec
+I, [2017-10-16T06:29:47.666113 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.666192 #28577]  INFO -- default-centos-72: Command "systemctl status go-server"
+I, [2017-10-16T06:29:47.666216 #28577]  INFO -- default-centos-72:   stdout
+I, [2017-10-16T06:29:47.728672 #28577]  INFO -- default-centos-72: [32m    should contain "active"[0m
+I, [2017-10-16T06:29:47.728750 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.728772 #28577]  INFO -- default-centos-72: Service "firewalld"
+I, [2017-10-16T06:29:47.744636 #28577]  INFO -- default-centos-72: [32m  should be running[0m
+I, [2017-10-16T06:29:47.744716 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.744740 #28577]  INFO -- default-centos-72: Command "systemctl status ufw"
+I, [2017-10-16T06:29:47.744758 #28577]  INFO -- default-centos-72:   stdout
+I, [2017-10-16T06:29:47.752829 #28577]  INFO -- default-centos-72: [32m    should contain "active"[0m
+I, [2017-10-16T06:29:47.752914 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.752937 #28577]  INFO -- default-centos-72: File "/etc/default/ufw"
+I, [2017-10-16T06:29:47.752955 #28577]  INFO -- default-centos-72:   content
+I, [2017-10-16T06:29:47.764134 #28577]  INFO -- default-centos-72: [32m    should match /IPV6=no/[0m
+I, [2017-10-16T06:29:47.764223 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.764248 #28577]  INFO -- default-centos-72: Command "netstat -an | grep 8153"
+I, [2017-10-16T06:29:47.764266 #28577]  INFO -- default-centos-72:   stdout
+I, [2017-10-16T06:29:47.774395 #28577]  INFO -- default-centos-72: [32m    should contain "LISTEN"[0m
+I, [2017-10-16T06:29:47.774474 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.774498 #28577]  INFO -- default-centos-72: Command "netstat -an | grep 8154"
+I, [2017-10-16T06:29:47.774515 #28577]  INFO -- default-centos-72:   stdout
+I, [2017-10-16T06:29:47.786732 #28577]  INFO -- default-centos-72: [32m    should contain "LISTEN"[0m
+I, [2017-10-16T06:29:47.787085 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.787136 #28577]  INFO -- default-centos-72: Finished in 0.12574 seconds (files took 0.40979 seconds to load)
+I, [2017-10-16T06:29:47.787156 #28577]  INFO -- default-centos-72: [32m6 examples, 0 failures[0m
+I, [2017-10-16T06:29:47.787189 #28577]  INFO -- default-centos-72: 
+I, [2017-10-16T06:29:47.797777 #28577]  INFO -- default-centos-72: Finished verifying <default-centos-72> (0m12.69s).

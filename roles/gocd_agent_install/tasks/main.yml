@@ -1,0 +1,39 @@
+---
+
+- name: verifying the java installation
+  yum:
+    list: java
+  register: verify_java
+
+- name: installing java as it was not found
+  yum:
+    name: java
+    state: latest
+  when: verify_java.results|selectattr("yumstate", "match", "installed")|list|length == 0
+
+- name: creating YUM repository
+  get_url:
+    url: https://download.gocd.org/gocd.repo
+    dest: /etc/yum.repos.d/gocd.repo
+
+- name: installing go-agent 
+  yum:
+    name: go-agent
+    state: installed
+  notify: restart go-agent
+
+- name: integrating go-agent to go-server
+  replace:
+    path: /etc/default/go-agent
+    regexp: '127.0.0.1'
+    replace: '192.168.56.101'
+  notify: restart go-agent
+
+- name: enabling go-agent on go-server
+  template:
+    src: autoregister.properties
+    dest: /var/lib/go-agent/config/autoregister.properties
+    owner: go
+    group: go
+    mode: 0644
+  notify: restart go-agent 

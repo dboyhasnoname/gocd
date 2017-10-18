@@ -1,0 +1,9 @@
+---
+username: kitchen
+ssh_key: "/root/data/public/roles/gocd_agent_install/.kitchen/docker_id_rsa"
+image_id: 26c2870a5941
+container_id: 71a46b94658ed75661f65d15c2e44d7ff795d63868377628b862a581a384ec4c
+hostname: localhost
+port: 32768
+last_action: verify
+last_error: 

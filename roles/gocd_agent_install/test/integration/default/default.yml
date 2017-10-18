@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+
+  roles:
+    - gocd_agent_install
+

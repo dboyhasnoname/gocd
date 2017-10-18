@@ -1,0 +1,21 @@
+---
+
+- name: start go-server
+  service:
+    name: go-server
+    state: restarted
+
+- name: restart firewalld
+  service:
+    name: firewalld
+    state: restarted
+
+- name: start ufw
+  service: 
+    name: ufw
+    state: restarted
+
+- name: restart go-agent
+  service:
+    name: go-agent
+    state: restarted

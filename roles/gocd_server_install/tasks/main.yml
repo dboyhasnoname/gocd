@@ -1,0 +1,77 @@
+---
+
+- name: verifying the java installation
+  yum:
+    list: java
+  register: verify_java
+
+- name: installing java as it was not found
+  yum:
+    name: java
+    state: latest
+  when: verify_java.results|selectattr("yumstate", "match", "installed")|list|length == 0
+
+- name: creating YUM repository
+  get_url:
+    url: https://download.gocd.org/gocd.repo
+    dest: /etc/yum.repos.d/gocd.repo 
+
+- name: installing go-server
+  yum:
+    name: go-server
+    state: latest
+  notify: start go-server
+ 
+- name: checking if firewalld service is available
+  command: which firewalld
+  ignore_errors: true
+  register: check_firewalld
+
+- name: installing firewalld as it was not found
+  yum:
+    name: firewalld
+    state: installed
+  when: check_firewalld | failed
+
+- name: enabling traffic for go-server ports through firewall
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: true
+    state: enabled
+  with_items:
+    - 8153
+    - 8154
+  notify: restart firewalld 
+
+- name: check if UFW is installed
+  command: which ufw
+  ignore_errors: true
+  register: check_ufw
+ 
+- name: installing UFW
+  yum:
+    name: ufw
+    state: installed
+  when: check_ufw| failed
+
+- name: changing IPv6 settings for UFW
+  replace:
+    path: /etc/default/ufw
+    regexp: 'IPV6=yes'
+    replace: 'IPV6=no'
+  
+- name: starting UFW
+  service:
+    name: ufw
+    state: started
+
+- name: enabling go traffic through UFW
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items:
+    - 8153
+    - 8154
+
+

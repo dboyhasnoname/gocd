@@ -1,0 +1,29 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen
+  ansible_verbose: false
+  playbook: test/integration/default/default.yml
+  ansible_verbosity: 2
+  roles_path: "../../roles"
+#  ansible_vault_password_file: ../../vault-key
+
+platforms:
+  - name: centos-7.2
+    driver_config:
+      privileged: true
+      run_command: /usr/sbin/init
+      provision_command:
+        - curl -L https://www.opscode.com/chef/install.sh | bash
+#        - rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        - yum install epel-release -y
+        - yum makecache
+        - yum -y install ansible libselinux-python git lvm2
+        - yum -y install net-tools
+suites:
+  - name: default
+

@@ -1,2 +1,1 @@
-# gocd
-GoCD installation
+# public
